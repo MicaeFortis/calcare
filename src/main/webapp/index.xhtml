@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{billsController.init}" />
+</f:metadata>
+
+<h:head>
+    <title>Calcare</title>
+</h:head>
+
+<h:body>
+    <p:dataTable var="bill" value="#{billsController.bills}">
+        <p:column headerText="Id">
+            <h:outputText value="#{bill.id}" />
+        </p:column>
+
+        <p:column headerText="Name">
+            <h:outputText value="#{bill.name}" />
+        </p:column>
+
+        <p:column headerText="Created">
+            <h:outputText value="#{bill.created}" />
+        </p:column>
+
+        <p:column headerText="Note">
+            <h:outputText value="#{bill.note}" />
+        </p:column>
+    </p:dataTable>
+    <h:form>
+    <p:commandButton type="submit" ajax="false" action="#{billsController.addBill}" value="Create" styleClass="ui-priority-primary" />
+    </h:form>
+</h:body>
+</html>
