@@ -1,0 +1,297 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5beta2
+-- Dumped by pg_dump version 9.5beta2
+
+-- Started on 2017-07-24 08:54:36
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 186 (class 3079 OID 12355)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2134 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 181 (class 1259 OID 49451)
+-- Name: bill; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE bill (
+    id integer NOT NULL,
+    name text NOT NULL,
+    created date NOT NULL,
+    note text
+);
+
+
+ALTER TABLE bill OWNER TO postgres;
+
+--
+-- TOC entry 180 (class 1259 OID 49449)
+-- Name: bill_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE bill_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE bill_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2135 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: bill_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE bill_id_seq OWNED BY bill.id;
+
+
+--
+-- TOC entry 183 (class 1259 OID 49462)
+-- Name: item; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE item (
+    id integer NOT NULL,
+    name text NOT NULL,
+    cost numeric NOT NULL,
+    divider numeric NOT NULL
+);
+
+
+ALTER TABLE item OWNER TO postgres;
+
+--
+-- TOC entry 182 (class 1259 OID 49460)
+-- Name: item_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE item_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE item_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2136 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE item_id_seq OWNED BY item.id;
+
+
+--
+-- TOC entry 185 (class 1259 OID 49478)
+-- Name: payer; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE payer (
+    id integer NOT NULL,
+    name text
+);
+
+
+ALTER TABLE payer OWNER TO postgres;
+
+--
+-- TOC entry 184 (class 1259 OID 49476)
+-- Name: payer_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE payer_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE payer_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2137 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: payer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE payer_id_seq OWNED BY payer.id;
+
+
+--
+-- TOC entry 1996 (class 2604 OID 49454)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY bill ALTER COLUMN id SET DEFAULT nextval('bill_id_seq'::regclass);
+
+
+--
+-- TOC entry 1997 (class 2604 OID 49465)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY item ALTER COLUMN id SET DEFAULT nextval('item_id_seq'::regclass);
+
+
+--
+-- TOC entry 1998 (class 2604 OID 49481)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY payer ALTER COLUMN id SET DEFAULT nextval('payer_id_seq'::regclass);
+
+
+--
+-- TOC entry 2122 (class 0 OID 49451)
+-- Dependencies: 181
+-- Data for Name: bill; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO bill VALUES (1, 'qwer', '2017-07-11', 'r');
+INSERT INTO bill VALUES (2, 'sad', '2017-07-10', 'wqe');
+
+
+--
+-- TOC entry 2138 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: bill_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('bill_id_seq', 2, true);
+
+
+--
+-- TOC entry 2124 (class 0 OID 49462)
+-- Dependencies: 183
+-- Data for Name: item; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2139 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('item_id_seq', 1, false);
+
+
+--
+-- TOC entry 2126 (class 0 OID 49478)
+-- Dependencies: 185
+-- Data for Name: payer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO payer VALUES (1, 'Michal');
+INSERT INTO payer VALUES (2, 'Karolina');
+
+
+--
+-- TOC entry 2140 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: payer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('payer_id_seq', 2, true);
+
+
+--
+-- TOC entry 2000 (class 2606 OID 49459)
+-- Name: PK_BILL; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY bill
+    ADD CONSTRAINT "PK_BILL" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2002 (class 2606 OID 49470)
+-- Name: PK_ITEM; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY item
+    ADD CONSTRAINT "PK_ITEM" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2004 (class 2606 OID 49486)
+-- Name: PK_PAYER; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY payer
+    ADD CONSTRAINT "PK_PAYER" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2005 (class 2606 OID 49471)
+-- Name: FK_ITEM_BILL; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY item
+    ADD CONSTRAINT "FK_ITEM_BILL" FOREIGN KEY (id) REFERENCES bill(id);
+
+
+--
+-- TOC entry 2006 (class 2606 OID 49487)
+-- Name: PK_ITEM_PAYER; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY item
+    ADD CONSTRAINT "PK_ITEM_PAYER" FOREIGN KEY (id) REFERENCES payer(id);
+
+
+--
+-- TOC entry 2133 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2017-07-24 08:54:37
+
+--
+-- PostgreSQL database dump complete
+--
+
